@@ -11,6 +11,10 @@ import QtQuick 2.12
 
 import QGroundControl               1.0
 import QGroundControl.ScreenTools   1.0
+import QGroundControl.Controls      1.0
+import QGroundControl.Palette       1.0
+import QGroundControl.FactSystem    1.0
+import QGroundControl.SettingsManager  1.0
 
 //-------------------------------------------------------------------------
 //-- Toolbar Indicators
@@ -53,5 +57,16 @@ Row {
             source:             modelData
             visible:            item.showIndicator
         }
+    }
+
+    QGCLabel {
+        id:                     auralAlertStatusIndicator
+        text:                   qsTr("Aural alerts disabled")
+        color:                  qgcPal.colorRed
+        anchors.verticalCenter: parent.verticalCenter
+        font.pointSize:         ScreenTools.mediumFontPointSize
+        visible:                _audioMuted.value
+
+        property Fact _audioMuted: QGroundControl.settingsManager.appSettings.audioMuted
     }
 }
